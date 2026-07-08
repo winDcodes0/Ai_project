@@ -1,12 +1,5 @@
-// Paste your brand-new Google AI Studio API key here!
-const API_KEY = "AQ.Ab8RN6LLSCE3uLX4Tmr3SIxazypgXtMLrTX30E4-M-6VMg-jAg"; 
-const MODEL = "models/gemini-2.5-flash";
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/${MODEL}:generateContent?key=${API_KEY}`;
-
-const SYSTEM_INSTRUCTION = "You are a creative story generator AI. Your only function is to generate " +
-  "engaging, creative stories based on user prompts. If the user asks for anything other than a story, " +
-  "politely respond that you can only generate stories. Always respond with a complete story when given " +
-  "a genre, theme, or story idea.";
+// Connected directly to your live Render proxy server
+const BACKEND_URL = "https://ai-story-backend-ibvw.onrender.com/api/story"; 
 
 let currentUtterance = null;
 
@@ -29,34 +22,19 @@ async function sendMessage() {
   showTypingIndicator();
   
   try {
-    const response = await fetch(API_URL, {
+    // Forward the request to your backend proxy server
+    const response = await fetch(BACKEND_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{ text: SYSTEM_INSTRUCTION }]
-        },
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: `Write a complete, detailed story based on this idea/premise: ${message}` }]
-          }
-        ],
-        generationConfig: {
-          temperature: 0.9,
-          topK: 50,
-          topP: 0.95,
-          maxOutputTokens: 1200
-        }
-      })
+      body: JSON.stringify({ message: message }) 
     });
 
     const data = await response.json();
     
     if (data.error) {
-      throw new Error(data.error.message || "API Error");
+      throw new Error(data.error.message || data.error);
     }
 
     let reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 
@@ -113,7 +91,7 @@ function speakStory(text) {
 }
 
 function stopSpeaking() {
-  if (window.speechSynthesis.speaking) {
+  if (window.speechSynthesis && window.speechSynthesis.speaking) {
     window.speechSynthesis.cancel();
   }
 }
