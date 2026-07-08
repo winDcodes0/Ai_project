@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Story Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>AI Story Generator</h1>
+    <p>I can only create amazing stories - just give me a genre or theme!</p>
+  </div>
+  
+  <div class="chat-container" id="chat">
+    <div class="message bot">
+      Welcome to the AI Story Generator! I specialize in creating captivating stories. 
+      Give me a genre, theme, or idea, and I'll craft a unique story for you.
+    </div>
+    <div class="prompt-hint">Try: "fantasy adventure" or "sci-fi mystery" or "romantic comedy"</div>
+  </div>
+  
+  <div class="input-container">
+    <input type="text" id="user-input" placeholder="Enter a story genre or theme..." onkeypress="handleKeyPress(event)">
+    <button onclick="sendMessage()">Generate Story</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

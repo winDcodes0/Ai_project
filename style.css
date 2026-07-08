@@ -1,0 +1,204 @@
+:root {
+  --primary: #6c5ce7;
+  --primary-dark: #5649c0;
+  --secondary: #00cec9;
+  --bg: #f9f9ff;
+  --card: #ffffff;
+  --text: #2d3436;
+  --text-light: #636e72;
+  --user-bubble: #e84393;
+  --bot-bubble: var(--primary);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  color: var(--text);
+}
+
+.header {
+  background: var(--primary);
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.header p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+  background-blend-mode: overlay;
+  background-color: rgba(249, 249, 255, 0.9);
+}
+
+.message {
+  margin: 10px 0;
+  padding: 12px 16px;
+  border-radius: 18px;
+  max-width: 75%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  line-height: 1.5;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user {
+  background: var(--user-bubble);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.bot {
+  background: var(--card);
+  color: var(--text);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.input-container {
+  display: flex;
+  padding: 15px;
+  background: var(--card);
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary);
+}
+
+button {
+  margin-left: 12px;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(108, 92, 231, 0.2);
+}
+
+button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(108, 92, 231, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.typing-indicator {
+  display: flex;
+  padding: 12px 16px;
+  background: var(--card);
+  color: var(--text-light);
+  align-self: flex-start;
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  margin: 10px 0;
+  max-width: 75%;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--text-light);
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingAnimation {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+}
+
+.prompt-hint {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* --- Read Aloud Feature Styles --- */
+.speech-controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.speech-btn {
+  background: rgba(108, 92, 231, 0.1);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none;
+  margin-left: 0;
+  transition: all 0.2s ease;
+}
+
+.speech-btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.speech-btn.stop-btn {
+  border-color: #d63031;
+  color: #d63031;
+  background: rgba(214, 48, 49, 0.1);
+}
+
+.speech-btn.stop-btn:hover {
+  background: #d63031;
+  color: white;
+}
